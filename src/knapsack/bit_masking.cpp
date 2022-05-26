@@ -33,6 +33,9 @@ namespace assignment {
       // вычисление общего веса рассматриваемых элементов
       const int curr_weight = sum_helper(masked_weights);
 
+      if (curr_weight > capacity) {
+        continue;
+      }
       // ... обработка случая превышения емкости рюкзака
 
       // массив из "пользы" рассматриваемых элементов
@@ -41,12 +44,15 @@ namespace assignment {
       // вычисление общей "пользы" рассматриваемых элементов
       const int curr_profit = sum_helper(masked_profits);
 
+      if (curr_profit > best_profit) {
+        best_profit = curr_profit;
+        best_profit_mask = mask;
+      }
       // ... обработка случая нахождения большего значения "пользы"
     }
 
     // ... возвращение итогового результата: используйте mask2indices;
-
-    return {};
+    return mask2indices(profits, best_profit_mask);
   }
 
 }  // namespace assignment
